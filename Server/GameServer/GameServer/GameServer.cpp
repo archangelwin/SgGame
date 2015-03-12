@@ -52,14 +52,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		shared_ptr<Message> pMsg(new Message());
 		pMsg->mId = MessageId::WorkerExit;
 
-		NetworkWorker::getInstance()->postMessage(pMsg);
+		//NetworkWorker::getInstance()->postMessage(pMsg);
 
 		threadNetwork.join();
 	}
 
 	//assert(pStr == NULL);
-
-
 
 	::system("pause");
 	return 0;

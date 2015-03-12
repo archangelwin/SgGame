@@ -89,6 +89,7 @@
     <ClInclude Include="common\Service.h" />
     <ClInclude Include="common\SGMacro.h" />
     <ClInclude Include="common\Worker.h" />
+    <ClInclude Include="network\NetWorkService.h" />
     <ClInclude Include="network\NetworkWorker.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="common\Service.cpp" />
     <ClCompile Include="common\Worker.cpp" />
     <ClCompile Include="GameServer.cpp" />
+    <ClCompile Include="network\NetWorkService.cpp" />
     <ClCompile Include="network\NetworkWorker.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

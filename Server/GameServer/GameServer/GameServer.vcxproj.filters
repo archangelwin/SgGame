@@ -19,9 +19,6 @@
     <Filter Include="源文件\network">
       <UniqueIdentifier>{940c10c5-e95c-4332-8c97-7a850056fa09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\config">
-      <UniqueIdentifier>{f50355f2-9ec2-40da-96d0-92f0080a5d24}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -54,6 +51,9 @@
     <ClInclude Include="common\Service.h">
       <Filter>源文件\common</Filter>
     </ClInclude>
+    <ClInclude Include="network\NetWorkService.h">
+      <Filter>源文件\network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -70,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="common\Service.cpp">
       <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="network\NetWorkService.cpp">
+      <Filter>源文件\network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

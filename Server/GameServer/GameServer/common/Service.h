@@ -43,7 +43,7 @@ private:
 	std::string _name;
 	bool _running;
 	boost::uint16_t _tickTime;
-	boost::uint16_t _tickCostTime;
+	boost::uint64_t _tickCostTime;
 };
 
 NS_END_SG
