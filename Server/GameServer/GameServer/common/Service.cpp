@@ -15,6 +15,11 @@ void Service::onStart()
 
 void Service::onRunning()
 {
+	if (_tickTime <= 0)
+	{
+		return;
+	}
+
 	_running = true;
 	boost::posix_time::ptime tickStart, tickEnd;
 	boost::posix_time::millisec_posix_time_system_config::time_duration_type time_elapse;

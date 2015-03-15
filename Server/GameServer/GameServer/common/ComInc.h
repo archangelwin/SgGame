@@ -6,8 +6,11 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <vector>
+#include  <list>
 
 #include "boost/smart_ptr.hpp"
+#include "boost/thread.hpp"
 #include "boost/function.hpp"
 #include "boost/any.hpp"
 

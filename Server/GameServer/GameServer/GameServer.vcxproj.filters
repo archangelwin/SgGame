@@ -51,7 +51,13 @@
     <ClInclude Include="common\Service.h">
       <Filter>源文件\common</Filter>
     </ClInclude>
-    <ClInclude Include="network\NetWorkService.h">
+    <ClInclude Include="network\Session.h">
+      <Filter>源文件\network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\SessionService.h">
+      <Filter>源文件\network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\SessionServiceManager.h">
       <Filter>源文件\network</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +77,13 @@
     <ClCompile Include="common\Service.cpp">
       <Filter>源文件\common</Filter>
     </ClCompile>
-    <ClCompile Include="network\NetWorkService.cpp">
+    <ClCompile Include="network\Session.cpp">
+      <Filter>源文件\network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\SessionService.cpp">
+      <Filter>源文件\network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\SessionServiceManager.cpp">
       <Filter>源文件\network</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,12 +2,13 @@
 
 NS_BEGIN_SG
 
-NetworkWorker* NetworkWorker::p_NetInstance = new NetworkWorker("network", 50, 3344);
+NetworkWorker* NetworkWorker::p_NetInstance = new NetworkWorker(shared_ptr<ASIO_SERV>(new ASIO_SERV()), 3344);
 
-NetworkWorker::NetworkWorker(std::string name, boost::uint16_t tickTime, boost::uint16_t port)
-:Service(name, tickTime),
+NetworkWorker::NetworkWorker(shared_ptr<ASIO_SERV> ioservice, SgInt16 port)
+:Service("network", 0),
+_ioservice(ioservice),
 _port(port),
-_ioservice()
+_accptor(*ioservice, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), _port))
 {
 	std::cout << " NetworkWorker NetworkWorker" << std::endl;
 }
@@ -25,18 +26,34 @@ NetworkWorker* NetworkWorker::getInstance()
 void NetworkWorker::onStart()
 {
 	Service::onStart();
-	std::cout << " onStart" << std::endl;
+	std::cout << getName()<<" onStart at _port:" << _port<< std::endl;
+}
 
-	boost::asio::ip::tcp::acceptor accpt(_ioservice, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), _port));
-	_sock.reset(new boost::asio::ip::tcp::socket(_ioservice));
-	accpt.async_accept(*_sock, boost::bind(&NetworkWorker::handleAccept, this, _sock, _1));
-	
-	_ioservice.run();
+void NetworkWorker::startAccept()
+{
+	shared_ptr<boost::asio::ip::tcp::socket> _sock(new boost::asio::ip::tcp::socket(*_ioservice));
+	_accptor.async_accept(*_sock, boost::bind(&NetworkWorker::handleAccept, this, _sock, _1));
 }
 
 void NetworkWorker::handleAccept(shared_ptr<boost::asio::ip::tcp::socket> socket, boost::system::error_code err)
 {
+	if (err)
+	{
+		SG_TRACE2("handleAccept err: ", err);
+		return;
+	}
+
 	SG_TRACE2("handleAccept: ", socket->remote_endpoint().address());
+	SgInsSessionServMgr->addSession(socket);
+
+	//socket->write_some(boost::asio::buffer("hello"));
+	startAccept();
+}
+
+void NetworkWorker::onRunning()
+{
+	startAccept();
+	_ioservice->run();
 }
 
 void NetworkWorker::onFinish()
@@ -44,8 +61,9 @@ void NetworkWorker::onFinish()
 	Service::onFinish();
 	std::cout << getName() <<" onFinish" << std::endl;
 
-	_ioservice.stop();
-	_sock->close();
+	_ioservice->stop();
+	//_sock->close();
+	_accptor.close();
 }
 
 void NetworkWorker::onTick()
