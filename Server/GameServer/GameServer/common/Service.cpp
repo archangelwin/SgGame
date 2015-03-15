@@ -40,7 +40,7 @@ void Service::onRunning()
 		time_elapse = tickEnd - tickStart;
 		_tickCostTime = time_elapse.total_milliseconds();
 		
-		SG_TRACE2(getName()+"ticktime", _tickCostTime);
+		//SG_TRACE2(getName()+"ticktime", _tickCostTime);
 		if (_tickCostTime < _tickTime)
 		{
 			boost::this_thread::sleep(boost::posix_time::millisec(_tickTime - _tickCostTime));

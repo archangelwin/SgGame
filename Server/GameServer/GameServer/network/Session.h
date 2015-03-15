@@ -21,24 +21,13 @@ US_NS_BOOST
 class Session
 {
 public:
-	enum SessionStat
-	{
-		Idel = 0,
-		Working
-	};
-
 	Session(shared_ptr<ASIO_TCP_SOCKET> sock);
 	~Session();
-	inline SessionStat getSessionStat() const
-	{
-		return _sessionStat;
-	}
 
 	void onTick();
 
 private:
 	shared_ptr<ASIO_TCP_SOCKET> _sock;
-	SessionStat _sessionStat;
 };
 
 NS_END_SG

@@ -21,12 +21,22 @@ NS_BEGIN_SG
 class SessionService:public Service
 {
 public:
+	enum ServiceStat
+	{
+		NotWork = 0,
+		Idel,
+		Working,
+		Busy,
+		Full,
+	};
+
 	SessionService(std::string name, SgInt32 sessionCapacity);
 	~SessionService();
 
 	virtual void onTick();
 	inline SgInt32 getSessionCapacity();
 	inline SgInt32 getAliveSessionCount();
+	ServiceStat getServStat();
 	bool addSession(shared_ptr<Session> session);
 	bool removeSession(shared_ptr<Session> session);
 

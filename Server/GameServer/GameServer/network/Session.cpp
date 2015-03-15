@@ -3,8 +3,7 @@
 NS_BEGIN_SG
 
 Session::Session(shared_ptr<ASIO_TCP_SOCKET> sock)
-:_sock(NULL),
-_sessionStat(Session::SessionStat::Idel)
+:_sock(sock)
 {
 }
 
@@ -18,6 +17,10 @@ Session::~Session()
 
 void Session::onTick()
 {
+	if ((_sock!= NULL) && (_sock->is_open()))
+	{
+		_sock->write_some(boost::asio::buffer("hello tick\n\r"));
+	}
 }
 
 NS_END_SG

@@ -9,9 +9,15 @@
 
 #ifndef SessionManager_h__
 #define SessionManager_h__
+
 #include "../common/SGMacro.h"
 #include "../common/ComInc.h"
-#include "boost/asio.hpp"
+#include "./SessionService.h"
+
+#include <boost/asio.hpp>
+
+#define MAX_SESSION_SERV 10
+#define MAX_SESSION_SERV_CAPACITY 10
 
 US_NS_BOOST
 
@@ -20,15 +26,20 @@ NS_BEGIN_SG
 class SessionServiceManager
 {
 public:
-	~SessionServiceManager();
+	~SessionServiceManager()
+		;
 	static SessionServiceManager* getInstance();
 	void addSession(shared_ptr<ASIO_TCP_SOCKET> socket);
+	
+	void startSessionServices(shared_ptr<boost::thread_group> threadGroup);
 
 private:
 	SessionServiceManager();
 	static SessionServiceManager* p_instance;
 
-	std::vector<shared_ptr<ASIO_TCP_SOCKET>> _sockList;
+	shared_ptr<SessionService> getSessionService();
+
+	std::vector<shared_ptr<SessionService>> _sessionServList;
 };
 
 NS_END_SG
