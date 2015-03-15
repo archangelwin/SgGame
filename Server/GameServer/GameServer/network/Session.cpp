@@ -17,6 +17,18 @@ Session::~Session()
 
 void Session::onTick()
 {
+	if (_sock == NULL)
+	{
+		return;
+	}
+
+	if (!_sock->is_open())
+	{
+		SG_TRACE("client disconected!");
+		_sock.reset();
+		return;
+	}
+
 	if ((_sock!= NULL) && (_sock->is_open()))
 	{
 		_sock->write_some(boost::asio::buffer("hello tick\n\r"));
