@@ -16,8 +16,8 @@
 
 #include <boost/asio.hpp>
 
-#define MAX_SESSION_SERV 10
-#define MAX_SESSION_SERV_CAPACITY 10
+#define MAX_SESSION_SERV 1
+#define MAX_SESSION_SERV_CAPACITY 2
 
 US_NS_BOOST
 
