@@ -16,6 +16,7 @@
 #include <boost/log/sources/record_ostream.hpp>
 #include "boost/pool/singleton_pool.hpp"
 
+#include "./protocol/SgMsg.Proto.pb.h"
 
 US_NS_SG
 US_NS_BOOST
@@ -41,8 +42,12 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	std::cout << "main start" << std::endl;
 
-
 	initLog();
+
+	scoped_ptr<pbTest> pbTest(new pbTest());
+	pbTest->set_id(123);
+	pbTest->set_name("xxx123");
+	pbTest->PrintDebugString();
 
 	boost::thread threadNetwork(boost::bind(&NetworkWorker::run, NetworkWorker::getInstance()));
 	shared_ptr<boost::thread_group> threadGroup(new boost::thread_group());

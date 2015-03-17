@@ -19,6 +19,9 @@
     <Filter Include="源文件\network">
       <UniqueIdentifier>{940c10c5-e95c-4332-8c97-7a850056fa09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\protocol">
+      <UniqueIdentifier>{50cbacce-b800-44ac-bc21-42c251aa4434}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -60,6 +63,9 @@
     <ClInclude Include="network\SessionServiceManager.h">
       <Filter>源文件\network</Filter>
     </ClInclude>
+    <ClInclude Include="protocol\SgMsg.Proto.pb.h">
+      <Filter>源文件\protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -85,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="network\SessionServiceManager.cpp">
       <Filter>源文件\network</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\SgMsg.Proto.pb.cc">
+      <Filter>源文件\protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
