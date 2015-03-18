@@ -1,0 +1,4 @@
+enum MsgId 
+{
+    CS_PbTest = 1;
+}

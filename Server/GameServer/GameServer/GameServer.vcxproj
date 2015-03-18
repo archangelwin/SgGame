@@ -61,6 +61,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +86,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common\BytesUtils.hpp" />
     <ClInclude Include="common\ComInc.h" />
     <ClInclude Include="common\Message.h" />
     <ClInclude Include="common\Runable.hpp" />
@@ -95,7 +97,9 @@
     <ClInclude Include="network\Session.h" />
     <ClInclude Include="network\SessionServiceManager.h" />
     <ClInclude Include="network\SessionService.h" />
-    <ClInclude Include="protocol\SgMsg.Proto.pb.h" />
+    <ClInclude Include="protocol\MessageFactory.h" />
+    <ClInclude Include="protocol\message\SgMsg.Proto.pb.h" />
+    <ClInclude Include="protocol\message\SgMsgId.pb.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -107,7 +111,9 @@
     <ClCompile Include="network\Session.cpp" />
     <ClCompile Include="network\SessionServiceManager.cpp" />
     <ClCompile Include="network\SessionService.cpp" />
-    <ClCompile Include="protocol\SgMsg.Proto.pb.cc" />
+    <ClCompile Include="protocol\MessageFactory.cpp" />
+    <ClCompile Include="protocol\message\SgMsg.Proto.pb.cc" />
+    <ClCompile Include="protocol\message\SgMsgId.pb.cc" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,7 +16,9 @@
 #include <boost/log/sources/record_ostream.hpp>
 #include "boost/pool/singleton_pool.hpp"
 
-#include "./protocol/SgMsg.Proto.pb.h"
+#include "./protocol/message/SgMsg.Proto.pb.h"
+#include <google/protobuf/stubs/common.h>
+#include <google/protobuf/descriptor.h>
 
 US_NS_SG
 US_NS_BOOST
@@ -44,7 +46,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	initLog();
 
-	scoped_ptr<pbTest> pbTest(new pbTest());
+	scoped_ptr<PbTest> pbTest(new PbTest()->New());
 	pbTest->set_id(123);
 	pbTest->set_name("xxx123");
 	pbTest->PrintDebugString();

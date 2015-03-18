@@ -34,18 +34,18 @@ void protobuf_AddDesc_SgMsg_2eProto();
 void protobuf_AssignDesc_SgMsg_2eProto();
 void protobuf_ShutdownFile_SgMsg_2eProto();
 
-class pbTest;
+class PbTest;
 
 // ===================================================================
 
-class pbTest : public ::google::protobuf::Message {
+class PbTest : public ::google::protobuf::Message {
  public:
-  pbTest();
-  virtual ~pbTest();
+  PbTest();
+  virtual ~PbTest();
 
-  pbTest(const pbTest& from);
+  PbTest(const PbTest& from);
 
-  inline pbTest& operator=(const pbTest& from) {
+  inline PbTest& operator=(const PbTest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -59,19 +59,19 @@ class pbTest : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const pbTest& default_instance();
+  static const PbTest& default_instance();
 
-  void Swap(pbTest* other);
+  void Swap(PbTest* other);
 
   // implements Message ----------------------------------------------
 
-  inline pbTest* New() const { return New(NULL); }
+  inline PbTest* New() const { return New(NULL); }
 
-  pbTest* New(::google::protobuf::Arena* arena) const;
+  PbTest* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const pbTest& from);
-  void MergeFrom(const pbTest& from);
+  void CopyFrom(const PbTest& from);
+  void MergeFrom(const PbTest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -86,7 +86,7 @@ class pbTest : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(pbTest* other);
+  void InternalSwap(PbTest* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -121,7 +121,7 @@ class pbTest : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // @@protoc_insertion_point(class_scope:pbTest)
+  // @@protoc_insertion_point(class_scope:PbTest)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -141,90 +141,90 @@ class pbTest : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_SgMsg_2eProto();
 
   void InitAsDefaultInstance();
-  static pbTest* default_instance_;
+  static PbTest* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// pbTest
+// PbTest
 
 // required int32 id = 1;
-inline bool pbTest::has_id() const {
+inline bool PbTest::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void pbTest::set_has_id() {
+inline void PbTest::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void pbTest::clear_has_id() {
+inline void PbTest::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void pbTest::clear_id() {
+inline void PbTest::clear_id() {
   id_ = 0;
   clear_has_id();
 }
-inline ::google::protobuf::int32 pbTest::id() const {
-  // @@protoc_insertion_point(field_get:pbTest.id)
+inline ::google::protobuf::int32 PbTest::id() const {
+  // @@protoc_insertion_point(field_get:PbTest.id)
   return id_;
 }
-inline void pbTest::set_id(::google::protobuf::int32 value) {
+inline void PbTest::set_id(::google::protobuf::int32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:pbTest.id)
+  // @@protoc_insertion_point(field_set:PbTest.id)
 }
 
 // required string name = 2;
-inline bool pbTest::has_name() const {
+inline bool PbTest::has_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void pbTest::set_has_name() {
+inline void PbTest::set_has_name() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void pbTest::clear_has_name() {
+inline void PbTest::clear_has_name() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void pbTest::clear_name() {
+inline void PbTest::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_name();
 }
-inline const ::std::string& pbTest::name() const {
-  // @@protoc_insertion_point(field_get:pbTest.name)
+inline const ::std::string& PbTest::name() const {
+  // @@protoc_insertion_point(field_get:PbTest.name)
   return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void pbTest::set_name(const ::std::string& value) {
+inline void PbTest::set_name(const ::std::string& value) {
   set_has_name();
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:pbTest.name)
+  // @@protoc_insertion_point(field_set:PbTest.name)
 }
-inline void pbTest::set_name(const char* value) {
+inline void PbTest::set_name(const char* value) {
   set_has_name();
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:pbTest.name)
+  // @@protoc_insertion_point(field_set_char:PbTest.name)
 }
-inline void pbTest::set_name(const char* value, size_t size) {
+inline void PbTest::set_name(const char* value, size_t size) {
   set_has_name();
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:pbTest.name)
+  // @@protoc_insertion_point(field_set_pointer:PbTest.name)
 }
-inline ::std::string* pbTest::mutable_name() {
+inline ::std::string* PbTest::mutable_name() {
   set_has_name();
-  // @@protoc_insertion_point(field_mutable:pbTest.name)
+  // @@protoc_insertion_point(field_mutable:PbTest.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* pbTest::release_name() {
+inline ::std::string* PbTest::release_name() {
   clear_has_name();
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void pbTest::set_allocated_name(::std::string* name) {
+inline void PbTest::set_allocated_name(::std::string* name) {
   if (name != NULL) {
     set_has_name();
   } else {
     clear_has_name();
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:pbTest.name)
+  // @@protoc_insertion_point(field_set_allocated:PbTest.name)
 }
 
 

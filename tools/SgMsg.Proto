@@ -1,4 +1,4 @@
-message pbTest
+message PbTest
 {
 	required int32 id = 1;
 	required string name = 2;

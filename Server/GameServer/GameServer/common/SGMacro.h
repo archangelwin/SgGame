@@ -11,10 +11,11 @@
 
 #define ASIO_TCP_SOCKET boost::asio::ip::tcp::socket
 
-#define SgUint16 boost::uint16_t
+#define SgUInt8 boost::uint8_t
+#define SgUInt16 boost::uint16_t
 #define SgInt16 boost::int16_t
 #define SgInt32 boost::int32_t
-#define SgUint32 boost::uint32_t
+#define SgUInt32 boost::uint32_t
 
 #define SgScopedLock(__x) boost::mutex::scoped_lock lock((__x))
 

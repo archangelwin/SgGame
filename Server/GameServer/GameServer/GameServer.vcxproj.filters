@@ -22,6 +22,12 @@
     <Filter Include="源文件\protocol">
       <UniqueIdentifier>{50cbacce-b800-44ac-bc21-42c251aa4434}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\game">
+      <UniqueIdentifier>{174a2a31-e9df-4561-9dc9-57a624d4f81f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\protocol\message">
+      <UniqueIdentifier>{8d996a12-9e4a-438d-8c8b-04bc4b3d406c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -63,7 +69,16 @@
     <ClInclude Include="network\SessionServiceManager.h">
       <Filter>源文件\network</Filter>
     </ClInclude>
-    <ClInclude Include="protocol\SgMsg.Proto.pb.h">
+    <ClInclude Include="common\BytesUtils.hpp">
+      <Filter>源文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\message\SgMsg.Proto.pb.h">
+      <Filter>源文件\protocol\message</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\message\SgMsgId.pb.h">
+      <Filter>源文件\protocol\message</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\MessageFactory.h">
       <Filter>源文件\protocol</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,7 +107,13 @@
     <ClCompile Include="network\SessionServiceManager.cpp">
       <Filter>源文件\network</Filter>
     </ClCompile>
-    <ClCompile Include="protocol\SgMsg.Proto.pb.cc">
+    <ClCompile Include="protocol\message\SgMsg.Proto.pb.cc">
+      <Filter>源文件\protocol\message</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\message\SgMsgId.pb.cc">
+      <Filter>源文件\protocol\message</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\MessageFactory.cpp">
       <Filter>源文件\protocol</Filter>
     </ClCompile>
   </ItemGroup>
