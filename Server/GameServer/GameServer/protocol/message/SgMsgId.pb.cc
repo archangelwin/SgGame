@@ -18,7 +18,7 @@
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* MsgId_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor_ = NULL;
 
 }  // namespace
 
@@ -29,7 +29,7 @@ void protobuf_AssignDesc_SgMsgId_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "SgMsgId.proto");
   GOOGLE_CHECK(file != NULL);
-  MsgId_descriptor_ = file->enum_type(0);
+  NetMsgId_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -56,7 +56,8 @@ void protobuf_AddDesc_SgMsgId_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rSgMsgId.proto*\026\n\005MsgId\022\r\n\tCS_PbTest\020\001", 39);
+    "\n\rSgMsgId.proto*\031\n\010NetMsgId\022\r\n\tCS_PbTest"
+    "\020\001", 42);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SgMsgId.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_SgMsgId_2eproto);
@@ -68,11 +69,11 @@ struct StaticDescriptorInitializer_SgMsgId_2eproto {
     protobuf_AddDesc_SgMsgId_2eproto();
   }
 } static_descriptor_initializer_SgMsgId_2eproto_;
-const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MsgId_descriptor_;
+  return NetMsgId_descriptor_;
 }
-bool MsgId_IsValid(int value) {
+bool NetMsgId_IsValid(int value) {
   switch(value) {
     case 1:
       return true;

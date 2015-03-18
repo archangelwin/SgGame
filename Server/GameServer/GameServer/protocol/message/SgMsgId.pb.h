@@ -34,23 +34,23 @@ void protobuf_AssignDesc_SgMsgId_2eproto();
 void protobuf_ShutdownFile_SgMsgId_2eproto();
 
 
-enum MsgId {
+enum NetMsgId {
   CS_PbTest = 1
 };
-bool MsgId_IsValid(int value);
-const MsgId MsgId_MIN = CS_PbTest;
-const MsgId MsgId_MAX = CS_PbTest;
-const int MsgId_ARRAYSIZE = MsgId_MAX + 1;
+bool NetMsgId_IsValid(int value);
+const NetMsgId NetMsgId_MIN = CS_PbTest;
+const NetMsgId NetMsgId_MAX = CS_PbTest;
+const int NetMsgId_ARRAYSIZE = NetMsgId_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* MsgId_descriptor();
-inline const ::std::string& MsgId_Name(MsgId value) {
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor();
+inline const ::std::string& NetMsgId_Name(NetMsgId value) {
   return ::google::protobuf::internal::NameOfEnum(
-    MsgId_descriptor(), value);
+    NetMsgId_descriptor(), value);
 }
-inline bool MsgId_Parse(
-    const ::std::string& name, MsgId* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<MsgId>(
-    MsgId_descriptor(), name, value);
+inline bool NetMsgId_Parse(
+    const ::std::string& name, NetMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<NetMsgId>(
+    NetMsgId_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -67,10 +67,10 @@ inline bool MsgId_Parse(
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::MsgId> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetMsgId> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::MsgId>() {
-  return ::MsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetMsgId>() {
+  return ::NetMsgId_descriptor();
 }
 
 }  // namespace protobuf

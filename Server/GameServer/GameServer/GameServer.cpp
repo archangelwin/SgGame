@@ -45,11 +45,29 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "main start" << std::endl;
 
 	initLog();
-
-	scoped_ptr<PbTest> pbTest(new PbTest()->New());
+	scoped_ptr<PbTest> pbTest(new PbTest());
 	pbTest->set_id(123);
 	pbTest->set_name("xxx123");
 	pbTest->PrintDebugString();
+
+	SgUInt8 buff[1024];
+	memset(buff, 0x00, sizeof(buff));
+	SG_TRACE2("PbTest typeName", pbTest->GetTypeName());
+	pbTest->SerializePartialToArray(buff, 1024);
+	pbTest->set_id(222);
+	pbTest->PrintDebugString();
+	SgUInt32 len = pbTest->ByteSize();
+	pbTest->SerializePartialToArray(buff + len, 1024-len);
+
+	shared_ptr<PbTest> pbTest1 (pbTest->New());
+	pbTest1->ParseFromArray(buff, 1024);
+	SG_TRACE("pbTest1 PrintDebugString:");
+	pbTest1->PrintDebugString();
+	pbTest1->set_id(789);
+	
+	pbTest1->ParseFromArray(buff + len, 1024 - len);
+	SG_TRACE("pbTest1 PrintDebugString2:");
+	pbTest1->PrintDebugString();
 
 	boost::thread threadNetwork(boost::bind(&NetworkWorker::run, NetworkWorker::getInstance()));
 	shared_ptr<boost::thread_group> threadGroup(new boost::thread_group());

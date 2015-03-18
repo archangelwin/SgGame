@@ -16,6 +16,7 @@
 #include "../common/BytesUtils.hpp"
 #include "boost/asio.hpp"
 #include "../protocol/message/SgMsgId.pb.h"
+#include "../protocol/MessageFactory.h"
 
 #define RecvDataCacheMaxLen 8*1024*1024
 
@@ -27,7 +28,7 @@ using namespace boost::asio;
 struct NetMessage
 {
 public:
-	MsgId msgId;
+	NetMsgId msgId;
 	shared_ptr<google::protobuf::Message> message;
 };
 
@@ -43,7 +44,6 @@ public:
 private:
 	void begintReadData();
 	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
-	shared_ptr<NetMessage> decodeData(SgUInt8* buff, SgInt16& pos);
 	bool encodeData(shared_ptr<NetMessage> message, SgUInt8* buff, SgInt16& pos);
 
 	shared_ptr<ASIO_TCP_SOCKET> _sock;

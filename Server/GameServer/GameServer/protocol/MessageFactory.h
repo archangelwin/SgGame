@@ -8,16 +8,23 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.h>
-//#include "../google/protobuf/compile"
+#include "./message/SgMsgId.pb.h"
+#include "./message/SgMsg.Proto.pb.h"
+#include "../network/Session.h"
 
 NS_BEGIN_SG
+US_NS_BOOST
+
+#define MessageMap std::map<NetMsgId, google::protobuf::Message>
 
 class MessageFactory
 {
 public:
-	MessageFactory();
-	//google::protobuf::desc
-	//::google::protobuf::DescriptorPool
+	static shared_ptr<NetMessage> decodeMessage(SgUInt8* buff);
+	static bool encodeMessage(SgUInt8* buff, shared_ptr<NetMessage> mesaage, SgUInt32& outLen);
+
+private:
+	static MessageMap _dicMessage;
 };
 
 NS_END_SG

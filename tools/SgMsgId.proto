@@ -1,4 +1,4 @@
-enum MsgId 
+enum NetMsgId 
 {
     CS_PbTest = 1;
 }

@@ -8,6 +8,7 @@
 #include <queue>
 #include <vector>
 #include  <list>
+#include <map>
 
 #include "boost/smart_ptr.hpp"
 #include "boost/thread.hpp"

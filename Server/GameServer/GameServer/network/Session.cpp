@@ -68,28 +68,30 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 		return;
 	}
 
-	shared_ptr<NetMessage> message = decodeData(_recvDataCache, _recvDataCachePos);
-	if (message != NULL)
+	
+	shared_ptr<NetMessage> message;
+
+	while (1)
 	{
-		boost::mutex::scoped_lock lock(_muRecvMsgQueue);
-		_recvMessageQueue.push(message);
+		SgUInt16 len = BytesUtils::readUShort(_recvDataCache)+2;//2×Ö½Ú³¤¶È
+		if ((len>2) &&(_recvDataCachePos >= len))
+		{
+			message = MessageFactory::decodeMessage(_recvDataCache);
+			if (message != NULL)
+			{
+				boost::mutex::scoped_lock lock(_muRecvMsgQueue);
+				_recvMessageQueue.push(message);
+			}
+			memcpy(_recvDataCache, _recvDataCache + len, RecvDataCacheMaxLen - len);
+			_recvDataCachePos -= len;
+		}
+		else
+		{
+			break;
+		}
 	}
 
 	begintReadData();
-}
-
-shared_ptr<NetMessage> Session::decodeData(SgUInt8* buff, SgInt16& pos)
-{
-	shared_ptr<NetMessage> message;
-
-	SgUInt16 len = BytesUtils::readUShort(buff);
-	if (pos > len+2)
-	{
-		shared_ptr<NetMessage> message(new NetMessage());
-		message->msgId = (MsgId)BytesUtils::readUInt(buff+2);
-	}
-
-	return message;
 }
 
 NS_END_SG
