@@ -9,6 +9,7 @@
 #include <vector>
 #include  <list>
 #include <map>
+#include <cassert>
 
 #include "boost/smart_ptr.hpp"
 #include "boost/thread.hpp"

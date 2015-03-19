@@ -26,11 +26,31 @@ void Session::onTick()
 	{
 		return;
 	}
+}
 
-	if ((_sock!= NULL) && (_sock->is_open()))
+void Session::sendData()
+{
+	//error
+	boost::mutex::scoped_lock lock(_muSendMsg);
+	boost::asio::async_write(_sock,
+		boost::asio::buffer(_sendDataCache, _sendDataCachePos),
+		boost::bind(&Session::handleWrite, this,
+		boost::asio::placeholders::error,
+		boost::asio::placeholders::bytes_transferred));
+}
+
+void Session::handleWrite(const boost::system::error_code& error, size_t bytes_transferred)
+{
+	if (error)
 	{
-	//	_sock->write_some(boost::asio::buffer("hello tick\n\r"));
+		close();
+		return;
 	}
+
+	boost::mutex::scoped_lock lock(_muSendMsg);
+	assert(_sendDataCachePos > bytes_transferred);
+	memcpy(_sendDataCache, _sendDataCache + bytes_transferred, SendDataCacheMaxLen - bytes_transferred);
+	_sendDataCachePos -= bytes_transferred;
 }
 
 void Session::close()
@@ -60,6 +80,8 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 	}
 
 	SG_TRACE2("handleRead bytes_transferred:", bytes_transferred);
+
+	boost::mutex::scoped_lock lock(_muRecvMsg);
 	_recvDataCachePos += bytes_transferred;
 	if (_recvDataCachePos > RecvDataCacheMaxLen)
 	{
@@ -70,28 +92,39 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 
 	
 	shared_ptr<NetMessage> message;
+	SgInt16 readSize;
 
 	while (1)
 	{
-		SgUInt16 len = BytesUtils::readUShort(_recvDataCache)+2;//2×Ö½Ú³¤¶È
-		if ((len>2) &&(_recvDataCachePos >= len))
+		message = MessageFactory::decodeMessage(_recvDataCache, _recvDataCachePos, readSize);
+		if (message != NULL)
 		{
-			message = MessageFactory::decodeMessage(_recvDataCache);
-			if (message != NULL)
-			{
-				boost::mutex::scoped_lock lock(_muRecvMsgQueue);
-				_recvMessageQueue.push(message);
-			}
-			memcpy(_recvDataCache, _recvDataCache + len, RecvDataCacheMaxLen - len);
-			_recvDataCachePos -= len;
+			_recvMessageQueue.push(message);
+			memcpy(_recvDataCache, _recvDataCache + readSize, RecvDataCacheMaxLen - readSize);
+			_recvDataCachePos -= readSize;
+			memset(_recvDataCache + _recvDataCachePos, 0x00, RecvDataCacheMaxLen - _recvDataCachePos);
 		}
 		else
 		{
+			if (readSize == -1)
+			{
+				close();
+			}
 			break;
 		}
 	}
 
 	begintReadData();
+}
+
+void Session::sendNetMessage(shared_ptr<NetMessage> message)
+{
+	SgInt16 dataSize = 0;
+	boost::mutex::scoped_lock lock(_muSendMsg);
+	if (MessageFactory::encodeMessage(_sendDataCache + _sendDataCachePos, message, SendDataCacheMaxLen - _sendDataCachePos, dataSize))
+	{
+		_sendDataCachePos += dataSize;
+	}
 }
 
 NS_END_SG

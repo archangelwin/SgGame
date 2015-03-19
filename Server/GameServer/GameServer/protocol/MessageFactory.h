@@ -20,8 +20,8 @@ US_NS_BOOST
 class MessageFactory
 {
 public:
-	static shared_ptr<NetMessage> decodeMessage(SgUInt8* buff);
-	static bool encodeMessage(SgUInt8* buff, shared_ptr<NetMessage> mesaage, SgUInt32& outLen);
+	static shared_ptr<NetMessage> decodeMessage(SgUInt8* buff, SgUInt16 maxLen, SgInt16& outReadLen);
+	static bool encodeMessage(SgUInt8* buff, shared_ptr<NetMessage> mesaage, SgUInt32 maxLen, SgInt16& outDataSize);
 
 private:
 	static MessageMap _dicMessage;
