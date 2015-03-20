@@ -43,11 +43,15 @@ public:
 	void onTick();
 	void close();
 
+protected:
+	virtual bool processNetMessage(shared_ptr<NetMessage> netMsg);
+
 private:
 	void begintReadData();
 	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
 	void sendData();
 	void handleWrite(const boost::system::error_code& error, size_t bytes_transferred);
+	void processAllRecvNetMessage();
 
 	shared_ptr<ASIO_TCP_SOCKET> _sock;
 	SgUInt8 _recvDataCache[RecvDataCacheMaxLen];

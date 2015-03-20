@@ -30,9 +30,9 @@ void Session::onTick()
 
 void Session::sendData()
 {
-	//error
 	boost::mutex::scoped_lock lock(_muSendMsg);
-	boost::asio::async_write(_sock,
+	//boost::asio::async_write(_sock,
+	_sock->async_write_some(
 		boost::asio::buffer(_sendDataCache, _sendDataCachePos),
 		boost::bind(&Session::handleWrite, this,
 		boost::asio::placeholders::error,
@@ -91,7 +91,7 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 	}
 
 	
-	shared_ptr<NetMessage> message;
+	shared_ptr<NetMessage> message(NULL);
 	SgInt16 readSize;
 
 	while (1)
@@ -125,6 +125,23 @@ void Session::sendNetMessage(shared_ptr<NetMessage> message)
 	{
 		_sendDataCachePos += dataSize;
 	}
+}
+
+void Session::processAllRecvNetMessage()
+{
+	boost::mutex::scoped_lock lock(_muRecvMsg);
+	while (!_recvMessageQueue.empty())
+	{
+		processNetMessage(_recvMessageQueue.front());
+		_recvMessageQueue.pop();
+	}
+}
+
+bool Session::processNetMessage(shared_ptr<NetMessage> netMsg)
+{
+	SG_TRACE2("Session processNetMessage:", netMsg->msgId);
+	netMsg->message->PrintDebugString();
+	return true;
 }
 
 NS_END_SG

@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>..\..\protobuf-3.0.0-alpha-1\vsprojects\include;..\..\boost_1_57_0;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SgGame\Server\protobuf-3.0.0-alpha-1\vsprojects\Debug;..\..\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\protobuf-3.0.0-alpha-1\vsprojects\Debug;..\..\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

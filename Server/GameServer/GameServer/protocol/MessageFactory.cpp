@@ -6,7 +6,7 @@ MessageMap initMessageMap()
 {
 	MessageMap msgMapTmp;
 
-	msgMapTmp.insert(MessageMap::value_type(NetMsgId::CS_PbTest, PbTest()));
+	msgMapTmp.insert(MessageMap::value_type(NetMsgId::CS_PbTest, PbTest::default_instance().New()));
 	
 	return msgMapTmp;
 }
@@ -21,7 +21,7 @@ shared_ptr<NetMessage> MessageFactory::decodeMessage(SgUInt8* buff, SgUInt16 max
 	if (maxLen < msgLen + 2)
 	{
 		outReadLen = 0;
-		return;
+		return netMessage;
 	}
 
 	NetMsgId msgId = (NetMsgId)BytesUtils::readUInt32(buff+2);

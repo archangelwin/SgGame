@@ -15,7 +15,8 @@
 NS_BEGIN_SG
 US_NS_BOOST
 
-#define MessageMap std::map<NetMsgId, google::protobuf::Message>
+#define MessageMap std::map<NetMsgId, google::protobuf::Message*>
+struct NetMessage;
 
 class MessageFactory
 {
