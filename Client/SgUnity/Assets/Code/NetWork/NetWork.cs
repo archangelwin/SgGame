@@ -25,8 +25,8 @@ public class NetWork
 	public Byte[] _sendBuffer = null;
 	public Int32 _recvBuffPos = 0;
 	public Int32 _sendBuffPos = 0;
-	private object _mutexSend;
-	private object _mutextRecv;
+	private object _mutexSend = null;
+	private object _mutextRecv = null;
 
 	private string _serverIp;
 	private int _serverPort;
@@ -142,6 +142,11 @@ public class NetWork
 
 	public	bool send(Byte[] buff, Int32 dataSize)
 	{
+		if(!_sockConnecting)
+		{
+			return false;
+		}
+
 		lock(_mutexSend)
 		{
 			if(_recvBuffPos+dataSize > sendBuffLen)
