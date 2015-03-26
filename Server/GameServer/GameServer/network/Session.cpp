@@ -58,7 +58,8 @@ void Session::close()
 	if (!_sock->is_open())
 	{
 		SG_TRACE("client disconected!");
-		_sock.reset();
+		//_sock.reset();
+		_sock->close();
 		return;
 	}
 }

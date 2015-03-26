@@ -16,7 +16,7 @@
 #include <boost/log/sources/record_ostream.hpp>
 #include "boost/pool/singleton_pool.hpp"
 
-#include "./protocol/message/SgMsg.Proto.pb.h"
+#include "./protocol/message/SgMsg.pb.h"
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.h>
 
