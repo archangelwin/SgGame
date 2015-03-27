@@ -159,7 +159,7 @@ public class NetWork
 				return false;
 			}
 
-			Array.Copy(buff, dataSize, _sendBuffer, _sendBuffPos, dataSize);
+			Array.Copy(buff, 0, _sendBuffer, _sendBuffPos, dataSize);
 			_sendBuffPos += dataSize;
 		}
 

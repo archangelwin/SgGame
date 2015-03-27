@@ -36,6 +36,12 @@ shared_ptr<NetMessage> MessageFactory::decodeMessage(SgUInt8* buff, SgUInt16 max
 	outReadLen = msgLen + 4;
 	netMessage.reset(new NetMessage());
 	netMessage->msgId = msgId;
+/*
+	shared_ptr<PbTest> pbMessage(new PbTest());
+		pbMessage->set_id(0);
+		pbMessage->set_name("null");*/
+
+	netMessage->message = shared_ptr<PbTest>(new PbTest());
 	netMessage->message->ParseFromArray(buff+6, netMessage->message->ByteSize());
 	return netMessage;
 }
