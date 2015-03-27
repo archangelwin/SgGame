@@ -26,6 +26,16 @@ void Session::onTick()
 	{
 		return;
 	}
+
+	//shared_ptr<NetMessage> testMsg(new NetMessage());
+	//testMsg->msgId = NetMsgId::CS_PbTest;
+
+	//shared_ptr<PbTest> pbTest(new PbTest());
+	//pbTest->set_id(5362);
+	//pbTest->set_name("xxasd23");
+	//testMsg->message = pbTest;
+	//
+	//sendNetMessage(testMsg);
 }
 
 void Session::sendData()

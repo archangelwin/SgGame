@@ -147,6 +147,11 @@ public class NetWork
 			return false;
 		}
 
+		if(buff == null)
+		{
+			return false;
+		}
+
 		lock(_mutexSend)
 		{
 			if(_recvBuffPos+dataSize > sendBuffLen)

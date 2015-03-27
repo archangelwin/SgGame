@@ -46,7 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Code\Common\NetMessageHandle.cs" />
+     <Compile Include="Assets\Code\GameMain.cs" />
+     <Compile Include="Assets\Code\NetWork\MessageFactory.cs" />
+     <Compile Include="Assets\Code\NetWork\NetManager.cs" />
      <Compile Include="Assets\Code\NetWork\NetWork.cs" />
+     <Compile Include="Assets\Code\Protocol\NetMessages\SgMsg.cs" />
+     <Compile Include="Assets\Code\Protocol\NetMessages\SgMsgId.cs" />
+     <Compile Include="Assets\Code\Utils\ByteUtils.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\LanguageSelection.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\TypewriterEffect.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UIButton.cs" />

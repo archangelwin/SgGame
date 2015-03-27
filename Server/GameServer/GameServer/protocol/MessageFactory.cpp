@@ -13,27 +13,27 @@ MessageMap initMessageMap()
 
 MessageMap MessageFactory::_dicMessage(initMessageMap());
 
-//outReadLen return -1 with unkonw msgId
+//outReadLen return -1 with unkonw msgId (len(uint id + content) + id(ushort) + content)
 shared_ptr<NetMessage> MessageFactory::decodeMessage(SgUInt8* buff, SgUInt16 maxLen, SgInt16& outReadLen)
 {
 	shared_ptr<NetMessage> netMessage;
-	SgInt16 msgLen = BytesUtils::readUShort(buff);
-	if (maxLen < msgLen + 2)
+	SgInt32 msgLen = BytesUtils::readUInt32(buff);
+	if (maxLen < msgLen + 4)
 	{
 		outReadLen = 0;
 		return netMessage;
 	}
 
-	NetMsgId msgId = (NetMsgId)BytesUtils::readUInt32(buff+2);
+	NetMsgId msgId = (NetMsgId)BytesUtils::readUShort(buff+4);
 	MessageMap::iterator itMsg = _dicMessage.find(msgId);
 	if (itMsg == _dicMessage.end())
 	{
 		outReadLen = -1;
-		SG_TRACE2("MessageFactory::decodeMessage unkonw netMsgId:", netMessage->msgId);
+		SG_TRACE2("MessageFactory::decodeMessage unkonw netMsgId:", msgId);
 		return netMessage;
 	}
 
-	outReadLen = msgLen + 2;
+	outReadLen = msgLen + 4;
 	netMessage.reset(new NetMessage());
 	netMessage->msgId = msgId;
 	netMessage->message->ParseFromArray(buff+6, netMessage->message->ByteSize());
@@ -55,8 +55,8 @@ bool MessageFactory::encodeMessage(SgUInt8* buff, shared_ptr<NetMessage> netMmes
 		return false;
 	}
 
-	BytesUtils::writeUShort(buff, msgContentLen + 4);
-	BytesUtils::writeUint32(buff + 2, netMmesaage->msgId);
+	BytesUtils::writeUint32(buff, msgContentLen + 4);
+	BytesUtils::writeUShort(buff + 4, netMmesaage->msgId);
 	netMmesaage->message->SerializeToArray(buff + 6, msgContentLen);
 	outDataSize = msgContentLen + 6;
 	return true;
