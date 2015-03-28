@@ -123,9 +123,14 @@ public class NetWork
 
 	public	void recieveData(IAsyncResult iar)
 	{
-		int i32RecvSize = _socket.EndReceive(iar);
 		lock (_mutextRecv)
-		{ 
+		{
+			int i32RecvSize = _socket.EndReceive(iar);
+			if (i32RecvSize < 6)
+			{
+				return;
+			}
+
 			_recvBuffPos += i32RecvSize;
 			Int32 decodeLen;
 			if ((i32RecvSize > 0) && (funcDecodeData != null))
@@ -136,8 +141,9 @@ public class NetWork
 					Array.Copy(_recvBuffer, 0, _recvBuffer, _recvBuffPos, recvBuffLen - _recvBuffPos);
 				}
 			}
+
+			_socket.BeginReceive(_recvBuffer, _recvBuffPos, recvBuffLen - _recvBuffPos, SocketFlags.None, new AsyncCallback(recieveData), this);
 		}
-		_socket.BeginReceive(_recvBuffer, _recvBuffPos, recvBuffLen - _recvBuffPos, SocketFlags.None, new AsyncCallback(recieveData), this);
 	}
 
 	public	bool send(Byte[] buff, Int32 dataSize)

@@ -33,6 +33,7 @@ shared_ptr<NetMessage> MessageFactory::decodeMessage(SgUInt8* buff, SgUInt16 max
 		return netMessage;
 	}
 
+	SG_TRACE2("MessageFactory::decodeMessage netMsgId:", msgId);
 	outReadLen = msgLen + 4;
 	netMessage.reset(new NetMessage());
 	netMessage->msgId = msgId;
@@ -42,7 +43,7 @@ shared_ptr<NetMessage> MessageFactory::decodeMessage(SgUInt8* buff, SgUInt16 max
 		pbMessage->set_name("null");*/
 
 	netMessage->message = shared_ptr<PbTest>(new PbTest());
-	netMessage->message->ParseFromArray(buff+6, netMessage->message->ByteSize());
+	netMessage->message->ParseFromArray(buff + 6, msgLen-2);
 	return netMessage;
 }
 

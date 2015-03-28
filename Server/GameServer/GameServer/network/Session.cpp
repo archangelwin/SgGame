@@ -27,26 +27,37 @@ void Session::onTick()
 		return;
 	}
 
-	//shared_ptr<NetMessage> testMsg(new NetMessage());
-	//testMsg->msgId = NetMsgId::CS_PbTest;
+	SG_TRACE("onTick sendNet Message");
+	shared_ptr<NetMessage> testMsg(new NetMessage());
+	testMsg->msgId = NetMsgId::CS_PbTest;
 
-	//shared_ptr<PbTest> pbTest(new PbTest());
-	//pbTest->set_id(5362);
-	//pbTest->set_name("xxasd23");
-	//testMsg->message = pbTest;
-	//
-	//sendNetMessage(testMsg);
+	shared_ptr<PbTest> pbTest(new PbTest());
+	pbTest->set_id(5362);
+	pbTest->set_name("xxasd23");
+	testMsg->message = pbTest;
+
+	sendNetMessage(testMsg);
+
+	sendData();
 }
 
 void Session::sendData()
 {
+	if ((_sock == NULL) || (!_sock->is_open()))
+	{
+		return;
+	}
+
 	boost::mutex::scoped_lock lock(_muSendMsg);
 	//boost::asio::async_write(_sock,
-	_sock->async_write_some(
-		boost::asio::buffer(_sendDataCache, _sendDataCachePos),
-		boost::bind(&Session::handleWrite, this,
-		boost::asio::placeholders::error,
-		boost::asio::placeholders::bytes_transferred));
+	if (_sendDataCachePos > 0)
+	{
+		_sock->async_write_some(
+			boost::asio::buffer(_sendDataCache, _sendDataCachePos),
+			boost::bind(&Session::handleWrite, this,
+			boost::asio::placeholders::error,
+			boost::asio::placeholders::bytes_transferred));
+	}
 }
 
 void Session::handleWrite(const boost::system::error_code& error, size_t bytes_transferred)
@@ -58,7 +69,7 @@ void Session::handleWrite(const boost::system::error_code& error, size_t bytes_t
 	}
 
 	boost::mutex::scoped_lock lock(_muSendMsg);
-	assert(_sendDataCachePos > bytes_transferred);
+	assert(_sendDataCachePos >= bytes_transferred);
 	memcpy(_sendDataCache, _sendDataCache + bytes_transferred, SendDataCacheMaxLen - bytes_transferred);
 	_sendDataCachePos -= bytes_transferred;
 }
