@@ -23,6 +23,8 @@ public class MessageFactory
 		_dicNetMessage = new Dictionary<uint, Type>();
 		_queueNetMessage = new Queue<NetMessage>();
 		_mutexQueueMessage = new object();
+
+        registerNetMessage((uint)SgMsgId.NetMsgId.CS_PbTest, typeof(PbTest));
 	}
 
 	static public MessageFactory getInstance()
@@ -64,7 +66,7 @@ public class MessageFactory
 		Type t;
 		if (!_dicNetMessage.TryGetValue(messageId, out t))
 		{
-			Debug.Log("know messageId:" + messageId);
+			Debug.Log("unknow messageId:" + messageId);
 			return true;
 		}
 
@@ -75,8 +77,10 @@ public class MessageFactory
 		message.msgId   = (NetMsgId)messageId;
 		message.message = RuntimeTypeModel.Default.Deserialize(stream, null, t) as IExtensible;
 
-		lock(_mutexQueueMessage)
-		_queueNetMessage.Enqueue(message);
+        lock (_mutexQueueMessage)
+        {
+            _queueNetMessage.Enqueue(message);
+        }
 
 		return true;
 	}

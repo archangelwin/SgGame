@@ -27,16 +27,18 @@ void Session::onTick()
 		return;
 	}
 
-	SG_TRACE("onTick sendNet Message");
+	processAllRecvNetMessage();
+
+	//SG_TRACE("onTick sendNet Message");
 	shared_ptr<NetMessage> testMsg(new NetMessage());
 	testMsg->msgId = NetMsgId::CS_PbTest;
 
-	shared_ptr<PbTest> pbTest(new PbTest());
+	/*shared_ptr<PbTest> pbTest(new PbTest());
 	pbTest->set_id(5362);
 	pbTest->set_name("xxasd23");
 	testMsg->message = pbTest;
 
-	sendNetMessage(testMsg);
+	sendNetMessage(testMsg);*/
 
 	sendData();
 }

@@ -123,8 +123,8 @@ public class NetWork
 
 	public	void recieveData(IAsyncResult iar)
 	{
-		lock (_mutextRecv)
-		{
+        //lock (_mutextRecv)
+        //{
 			int i32RecvSize = _socket.EndReceive(iar);
 			if (i32RecvSize < 6)
 			{
@@ -143,7 +143,7 @@ public class NetWork
 			}
 
 			_socket.BeginReceive(_recvBuffer, _recvBuffPos, recvBuffLen - _recvBuffPos, SocketFlags.None, new AsyncCallback(recieveData), this);
-		}
+        //}
 	}
 
 	public	bool send(Byte[] buff, Int32 dataSize)

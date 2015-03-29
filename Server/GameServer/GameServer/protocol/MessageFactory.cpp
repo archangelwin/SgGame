@@ -62,7 +62,7 @@ bool MessageFactory::encodeMessage(SgUInt8* buff, shared_ptr<NetMessage> netMmes
 		return false;
 	}
 
-	BytesUtils::writeUint32(buff, msgContentLen + 4);
+	BytesUtils::writeUint32(buff, msgContentLen + 2);
 	BytesUtils::writeUShort(buff + 4, netMmesaage->msgId);
 	netMmesaage->message->SerializeToArray(buff + 6, msgContentLen);
 	outDataSize = msgContentLen + 6;
