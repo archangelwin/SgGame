@@ -37,6 +37,7 @@ public class NetManager : MonoBehaviour
 	public void start()
 	{
 		_netWork = new NetWork(ip, port);
+		_netWork.funcNetWorkStatChgCallBack = onNetWorkStatChg;
 		_netWork.funcDecodeData = _msgFactory.decodeData;
 		_netWork.init();
 	}
@@ -91,5 +92,10 @@ public class NetManager : MonoBehaviour
 		{
 			_netWork.uninit();
 		}
+	}
+
+	private void onNetWorkStatChg(NetWorkStat stat)
+	{
+		Debug.Log("onNetWorkStatChg: "+stat);
 	}
 }

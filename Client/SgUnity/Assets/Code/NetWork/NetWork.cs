@@ -6,18 +6,22 @@ using System.Net.Sockets;
 using System.Net;
 using UnityEngine;
 
-public delegate void FuncConnectToServerCallBack(NetWorkStat stat);
+public delegate void FuncNeStatChgCallBack(NetWorkStat stat);
 public delegate bool FuncDecodeData(Byte[] buff, Int32 dataLen, out Int32 decodeLen);
 
 public enum NetWorkStat
 {
-	Ok = 0,
+	None = 0,
 	NotReachable,
+	IpAddressInvalid,
+	Connecting,
+	ConnectFailed,
+	Connected,
+	Disconnected,
 }
 
 public class NetWork
 {
-	
 	public Thread _thread = null;
 	public Socket _socket = null;
 
@@ -26,7 +30,7 @@ public class NetWork
 	public Int32 _recvBuffPos = 0;
 	public Int32 _sendBuffPos = 0;
 	private object _mutexSend = null;
-	private object _mutextRecv = null;
+	//private object _mutextRecv = null;
 
 	private string _serverIp;
 	private int _serverPort;
@@ -35,7 +39,9 @@ public class NetWork
 	const Int32 sendBuffLen = 64 * 1024;
 
 	public FuncDecodeData funcDecodeData;
+	public FuncNeStatChgCallBack funcNetWorkStatChgCallBack;
 
+	private NetWorkStat _netWorkStat;
 	private bool _endThread = false;
 	private bool _threadRunning = false;
 	private bool _sockConnecting = false;
@@ -51,6 +57,8 @@ public class NetWork
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             Debug.Log("network NotReachable!");
+			_netWorkStat = NetWorkStat.NotReachable;
+			onNetWorkStatChg();
             return;
         }
 
@@ -58,6 +66,8 @@ public class NetWork
 		if (!IPAddress.TryParse(_serverIp, out ipAdress))
 		{
 			Debug.Log("IPAddress parser ip failed!");
+			_netWorkStat = NetWorkStat.IpAddressInvalid;
+			onNetWorkStatChg();
 			return;
 		}
 
@@ -66,6 +76,8 @@ public class NetWork
 
 		_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		_socket.BeginConnect(ipe, connectCallback, _socket);
+		_netWorkStat = NetWorkStat.Connecting;
+		onNetWorkStatChg();
         return;
 	}
 
@@ -91,6 +103,9 @@ public class NetWork
 		_socket = null;
 		_sockConnecting = false;
 
+		_netWorkStat = NetWorkStat.None;
+		//onNetWorkStatChg();
+
 		_sendBuffer = null;
 		_sendBuffPos = 0;
 		_mutexSend = null;
@@ -105,6 +120,8 @@ public class NetWork
         if(!sock.Connected)
         {
 			Debug.Log("connectCallback failed");
+			_netWorkStat = NetWorkStat.ConnectFailed;
+			onNetWorkStatChg();
             return;
         }
 
@@ -117,7 +134,10 @@ public class NetWork
 
 		_thread = new Thread(new ThreadStart(this.run));
 		_thread.Start();
-		
+
+		_netWorkStat = NetWorkStat.Connected;
+		onNetWorkStatChg();
+
 		Debug.Log(string.Format("<color=#00FF00>{0}</color>", "socket started! succ"));
     }
 
@@ -180,6 +200,13 @@ public class NetWork
 
 		while (true)
 		{
+			if (!checkSockStat())
+			{
+				_netWorkStat = NetWorkStat.Disconnected;
+				onNetWorkStatChg();
+				break;
+			}
+
 			if (_sendBuffPos > 0)
 			{
 				lock (_mutexSend)
@@ -196,18 +223,40 @@ public class NetWork
 
 			Thread.Sleep(10);
 		}
+
 		_threadRunning = false;
 		Debug.Log(string.Format("<color=yellow>{0}</color>", "end sock thread"));
 	}
 
+	private bool checkSockStat()
+	{
+		try
+		{
+			if (_socket.Poll(0, SelectMode.SelectRead) && _socket.Available == 0)
+			{
+				return false;
+			}
+		}
+		catch (SocketException ex)
+		{
+			Debug.LogException(ex);
+			return false;
+		}
+
+		return true;
+	}
+
     public bool isConnected()
     {
-        if(_socket == null)
-        {
-            return false;
-        }
-
-		return _socket.Connected;
+		return _netWorkStat == NetWorkStat.Connecting;
     }
+
+	private void onNetWorkStatChg()
+	{
+		if(funcNetWorkStatChgCallBack != null)
+		{
+			funcNetWorkStatChgCallBack(_netWorkStat);
+		}
+	}
 }
 
