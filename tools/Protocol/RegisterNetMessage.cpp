@@ -85,6 +85,7 @@ int main(int argc, char** args)
 		if (messageItem != NULL)
 		{
 			cout << "messageItem :" << messageItem->messageType <<" "<< messageItem->messageName << endl;
+			delete messageItem;
 		}
 	}
 
