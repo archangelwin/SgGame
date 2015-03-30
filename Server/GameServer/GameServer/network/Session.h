@@ -52,6 +52,7 @@ private:
 	void sendData();
 	void handleWrite(const boost::system::error_code& error, size_t bytes_transferred);
 	void processAllRecvNetMessage();
+	void onSockClose();
 
 	shared_ptr<ASIO_TCP_SOCKET> _sock;
 	SgUInt8 _recvDataCache[RecvDataCacheMaxLen];

@@ -165,7 +165,21 @@ bool Session::processNetMessage(shared_ptr<NetMessage> netMsg)
 {
 	SG_TRACE2("Session processNetMessage:", netMsg->msgId);
 	netMsg->message->PrintDebugString();
+
+	shared_ptr<NetMessage> testMsg(new NetMessage());
+	testMsg->msgId = NetMsgId::CS_PbTest;
+	shared_ptr<PbTest> pbTest(new PbTest());
+	pbTest->set_id(111);
+	pbTest->set_name("resonse  from server!");
+	testMsg->message = pbTest;
+	sendNetMessage(testMsg);
+
 	return true;
+}
+
+void Session::onSockClose()
+{
+
 }
 
 NS_END_SG
