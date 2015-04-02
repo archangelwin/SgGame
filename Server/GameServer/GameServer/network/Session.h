@@ -18,8 +18,8 @@
 #include "../protocol/message/SgMsgId.pb.h"
 #include "../protocol/MessageFactory.h"
 
-#define RecvDataCacheMaxLen 8*1024*1024
-#define SendDataCacheMaxLen 8*1024*1024
+#define RecvDataCacheMaxLen 256*1024
+#define SendDataCacheMaxLen 256*1024
 
 NS_BEGIN_SG
 US_NS_BOOST
@@ -50,6 +50,7 @@ private:
 	void begintReadData();
 	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
 	void sendData();
+	void trySendData();
 	void handleWrite(const boost::system::error_code& error, size_t bytes_transferred);
 	void processAllRecvNetMessage();
 	void onSockClose();
@@ -61,9 +62,12 @@ private:
 	boost::mutex _muRecvMsg;
 
 	SgUInt8 _sendDataCache[SendDataCacheMaxLen];
-	SgInt16 _sendDataCachePos;		//start 0 end _sendDataCachePos
+	SgInt16 _sendDataCachePos;		//start 0 end _sendDataCachePos valid data pos
+	SgInt16 _totalSendDataPos;		//current send data pos
+	SgInt16 _sendedDataPos;			//current sended data pos
 	std::queue<shared_ptr<NetMessage>> _sendMessageQueue;
 	boost::mutex _muSendMsg;
+	bool _isSending;
 };
 
 NS_END_SG

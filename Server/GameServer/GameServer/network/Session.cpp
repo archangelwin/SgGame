@@ -6,7 +6,11 @@ Session::Session(shared_ptr<ASIO_TCP_SOCKET> sock)
 :_sock(sock),
 _recvDataCachePos(0),
 _recvMessageQueue(),
-_sendMessageQueue()
+_sendDataCachePos(0),
+_sendMessageQueue(),
+_totalSendDataPos(0),
+_sendedDataPos(0),
+_isSending(false)
 {
 	memset(_recvDataCache, 0x00, sizeof(_recvDataCache));
 	begintReadData();
@@ -30,16 +34,17 @@ void Session::onTick()
 	processAllRecvNetMessage();
 
 	//SG_TRACE("onTick sendNet Message");
-	shared_ptr<NetMessage> testMsg(new NetMessage());
-	testMsg->msgId = NetMsgId::CS_PbTest;
 
-	/*shared_ptr<PbTest> pbTest(new PbTest());
-	pbTest->set_id(5362);
-	pbTest->set_name("xxasd23");
-	testMsg->message = pbTest;
+		shared_ptr<NetMessage> testMsg(new NetMessage());
+		testMsg->msgId = NetMsgId::CS_PbTest;
 
-	sendNetMessage(testMsg);*/
+		shared_ptr<PbTest> pbTest(new PbTest());
+		pbTest->set_id(2343);
+		pbTest->set_name("xxasd23");
+		testMsg->message = pbTest;
 
+	
+		sendNetMessage(testMsg);
 	sendData();
 }
 
@@ -51,11 +56,19 @@ void Session::sendData()
 	}
 
 	boost::mutex::scoped_lock lock(_muSendMsg);
-	//boost::asio::async_write(_sock,
+	if (_isSending)
+	{
+		return;
+	}
 	if (_sendDataCachePos > 0)
 	{
+		_isSending = true;
+		_sendedDataPos = 0;
+		_totalSendDataPos = _sendDataCachePos;
+
+		//SG_TRACE2("async_write_some _totalSendDataPos:", _totalSendDataPos);
 		_sock->async_write_some(
-			boost::asio::buffer(_sendDataCache, _sendDataCachePos),
+			boost::asio::buffer(_sendDataCache, _totalSendDataPos),
 			boost::bind(&Session::handleWrite, this,
 			boost::asio::placeholders::error,
 			boost::asio::placeholders::bytes_transferred));
@@ -71,9 +84,21 @@ void Session::handleWrite(const boost::system::error_code& error, size_t bytes_t
 	}
 
 	boost::mutex::scoped_lock lock(_muSendMsg);
-	assert(_sendDataCachePos >= bytes_transferred);
-	memcpy(_sendDataCache, _sendDataCache + bytes_transferred, SendDataCacheMaxLen - bytes_transferred);
-	_sendDataCachePos -= bytes_transferred;
+	//SG_TRACE2("handleWrite bytes_transferred:", bytes_transferred);
+	//SG_TRACE2("handleWrite _sendedDataPos:", _sendedDataPos);
+	_sendedDataPos += bytes_transferred;
+	assert(_sendedDataPos <= _totalSendDataPos);
+
+	if (_sendedDataPos < _totalSendDataPos)
+	{
+		return;
+	}
+
+	memcpy(_sendDataCache, _sendDataCache + _totalSendDataPos, SendDataCacheMaxLen - _totalSendDataPos);
+	_sendDataCachePos -= _totalSendDataPos;
+	_totalSendDataPos = _sendedDataPos = 0;
+	_isSending = false;
+	//sendData();
 }
 
 void Session::close()
@@ -148,6 +173,8 @@ void Session::sendNetMessage(shared_ptr<NetMessage> message)
 	if (MessageFactory::encodeMessage(_sendDataCache + _sendDataCachePos, message, SendDataCacheMaxLen - _sendDataCachePos, dataSize))
 	{
 		_sendDataCachePos += dataSize;
+		SG_TRACE2("encodeMessage size: ", dataSize);
+		SG_TRACE2("encodeMessage _sendDataCachePos: ", _sendDataCachePos);
 	}
 }
 
