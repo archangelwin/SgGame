@@ -34,4 +34,35 @@ namespace SgMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UseItem")]
+  public partial class UseItem : global::ProtoBuf.IExtensible
+  {
+    public UseItem() {}
+    
+    private int _useCommond;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"useCommond", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int useCommond
+    {
+      get { return _useCommond; }
+      set { _useCommond = value; }
+    }
+    private int _pktId;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"pktId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int pktId
+    {
+      get { return _pktId; }
+      set { _pktId = value; }
+    }
+    private int _itemIndex;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"itemIndex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int itemIndex
+    {
+      get { return _itemIndex; }
+      set { _itemIndex = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }

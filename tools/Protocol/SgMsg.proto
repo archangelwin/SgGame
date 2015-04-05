@@ -3,3 +3,10 @@ message PbTest
 	required int32 id = 1;
 	required string name = 2;
 }
+
+message UseItem
+{
+	required int32 useCommond = 1;
+	required int32 pktId = 2;
+	required int32 itemIndex = 3;
+}

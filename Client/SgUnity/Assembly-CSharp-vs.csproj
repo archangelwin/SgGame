@@ -48,9 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\Code\Common\NetMessageHandle.cs" />
      <Compile Include="Assets\Code\GameMain.cs" />
-     <Compile Include="Assets\Code\NetWork\MessageFactory.cs" />
      <Compile Include="Assets\Code\NetWork\NetManager.cs" />
+     <Compile Include="Assets\Code\NetWork\NetMessageCodec.cs" />
      <Compile Include="Assets\Code\NetWork\NetWork.cs" />
+     <Compile Include="Assets\Code\Protocol\NetMessageFactory.cs" />
      <Compile Include="Assets\Code\Protocol\NetMessages\SgMsg.cs" />
      <Compile Include="Assets\Code\Protocol\NetMessages\SgMsgId.cs" />
      <Compile Include="Assets\Code\Utils\ByteUtils.cs" />

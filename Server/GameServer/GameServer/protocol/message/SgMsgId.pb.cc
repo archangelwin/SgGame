@@ -56,8 +56,8 @@ void protobuf_AddDesc_SgMsgId_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rSgMsgId.proto*\031\n\010NetMsgId\022\r\n\tCS_PbTest"
-    "\020\001", 42);
+    "\n\rSgMsgId.proto*)\n\010NetMsgId\022\r\n\tCS_PbTest"
+    "\020\001\022\016\n\nCS_UseItem\020\002", 58);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SgMsgId.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_SgMsgId_2eproto);
@@ -76,6 +76,7 @@ const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor() {
 bool NetMsgId_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
       return true;
     default:
       return false;

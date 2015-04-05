@@ -35,6 +35,7 @@ void protobuf_AssignDesc_SgMsg_2eproto();
 void protobuf_ShutdownFile_SgMsg_2eproto();
 
 class PbTest;
+class UseItem;
 
 // ===================================================================
 
@@ -143,6 +144,118 @@ class PbTest : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static PbTest* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class UseItem : public ::google::protobuf::Message {
+ public:
+  UseItem();
+  virtual ~UseItem();
+
+  UseItem(const UseItem& from);
+
+  inline UseItem& operator=(const UseItem& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UseItem& default_instance();
+
+  void Swap(UseItem* other);
+
+  // implements Message ----------------------------------------------
+
+  inline UseItem* New() const { return New(NULL); }
+
+  UseItem* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const UseItem& from);
+  void MergeFrom(const UseItem& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(UseItem* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 useCommond = 1;
+  inline bool has_usecommond() const;
+  inline void clear_usecommond();
+  static const int kUseCommondFieldNumber = 1;
+  inline ::google::protobuf::int32 usecommond() const;
+  inline void set_usecommond(::google::protobuf::int32 value);
+
+  // required int32 pktId = 2;
+  inline bool has_pktid() const;
+  inline void clear_pktid();
+  static const int kPktIdFieldNumber = 2;
+  inline ::google::protobuf::int32 pktid() const;
+  inline void set_pktid(::google::protobuf::int32 value);
+
+  // required int32 itemIndex = 3;
+  inline bool has_itemindex() const;
+  inline void clear_itemindex();
+  static const int kItemIndexFieldNumber = 3;
+  inline ::google::protobuf::int32 itemindex() const;
+  inline void set_itemindex(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:UseItem)
+ private:
+  inline void set_has_usecommond();
+  inline void clear_has_usecommond();
+  inline void set_has_pktid();
+  inline void clear_has_pktid();
+  inline void set_has_itemindex();
+  inline void clear_has_itemindex();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 usecommond_;
+  ::google::protobuf::int32 pktid_;
+  ::google::protobuf::int32 itemindex_;
+  friend void  protobuf_AddDesc_SgMsg_2eproto();
+  friend void protobuf_AssignDesc_SgMsg_2eproto();
+  friend void protobuf_ShutdownFile_SgMsg_2eproto();
+
+  void InitAsDefaultInstance();
+  static UseItem* default_instance_;
+};
 // ===================================================================
 
 
@@ -225,6 +338,82 @@ inline void PbTest::set_allocated_name(::std::string* name) {
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
   // @@protoc_insertion_point(field_set_allocated:PbTest.name)
+}
+
+// -------------------------------------------------------------------
+
+// UseItem
+
+// required int32 useCommond = 1;
+inline bool UseItem::has_usecommond() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UseItem::set_has_usecommond() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UseItem::clear_has_usecommond() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UseItem::clear_usecommond() {
+  usecommond_ = 0;
+  clear_has_usecommond();
+}
+inline ::google::protobuf::int32 UseItem::usecommond() const {
+  // @@protoc_insertion_point(field_get:UseItem.useCommond)
+  return usecommond_;
+}
+inline void UseItem::set_usecommond(::google::protobuf::int32 value) {
+  set_has_usecommond();
+  usecommond_ = value;
+  // @@protoc_insertion_point(field_set:UseItem.useCommond)
+}
+
+// required int32 pktId = 2;
+inline bool UseItem::has_pktid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UseItem::set_has_pktid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UseItem::clear_has_pktid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UseItem::clear_pktid() {
+  pktid_ = 0;
+  clear_has_pktid();
+}
+inline ::google::protobuf::int32 UseItem::pktid() const {
+  // @@protoc_insertion_point(field_get:UseItem.pktId)
+  return pktid_;
+}
+inline void UseItem::set_pktid(::google::protobuf::int32 value) {
+  set_has_pktid();
+  pktid_ = value;
+  // @@protoc_insertion_point(field_set:UseItem.pktId)
+}
+
+// required int32 itemIndex = 3;
+inline bool UseItem::has_itemindex() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UseItem::set_has_itemindex() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UseItem::clear_has_itemindex() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UseItem::clear_itemindex() {
+  itemindex_ = 0;
+  clear_has_itemindex();
+}
+inline ::google::protobuf::int32 UseItem::itemindex() const {
+  // @@protoc_insertion_point(field_get:UseItem.itemIndex)
+  return itemindex_;
+}
+inline void UseItem::set_itemindex(::google::protobuf::int32 value) {
+  set_has_itemindex();
+  itemindex_ = value;
+  // @@protoc_insertion_point(field_set:UseItem.itemIndex)
 }
 
 

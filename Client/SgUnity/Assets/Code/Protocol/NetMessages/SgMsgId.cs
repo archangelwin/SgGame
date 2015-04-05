@@ -15,7 +15,10 @@ namespace SgMsgId
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"CS_PbTest", Value=1)]
-      CS_PbTest = 1
+      CS_PbTest = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CS_UseItem", Value=2)]
+      CS_UseItem = 2
     }
   
 }

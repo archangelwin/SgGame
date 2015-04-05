@@ -16,7 +16,7 @@
 #include "../common/BytesUtils.hpp"
 #include "boost/asio.hpp"
 #include "../protocol/message/SgMsgId.pb.h"
-#include "../protocol/MessageFactory.h"
+#include "../protocol/NetMessageCodec.h"
 
 #define RecvDataCacheMaxLen 256*1024
 #define SendDataCacheMaxLen 256*1024
@@ -29,6 +29,8 @@ using namespace boost::asio;
 struct NetMessage
 {
 public:
+	NetMessage();
+	NetMessage(NetMsgId msgId, shared_ptr<google::protobuf::Message> msg);
 	NetMsgId msgId;
 	shared_ptr<google::protobuf::Message> message;
 };

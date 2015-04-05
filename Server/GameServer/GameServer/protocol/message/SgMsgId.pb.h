@@ -35,11 +35,12 @@ void protobuf_ShutdownFile_SgMsgId_2eproto();
 
 
 enum NetMsgId {
-  CS_PbTest = 1
+  CS_PbTest = 1,
+  CS_UseItem = 2
 };
 bool NetMsgId_IsValid(int value);
 const NetMsgId NetMsgId_MIN = CS_PbTest;
-const NetMsgId NetMsgId_MAX = CS_PbTest;
+const NetMsgId NetMsgId_MAX = CS_UseItem;
 const int NetMsgId_ARRAYSIZE = NetMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor();

@@ -19,7 +19,7 @@ public class NetManager : MonoBehaviour
 
 	[HideInInspector]
 	public INetMessageHandle messageHandle;
-	private MessageFactory _msgFactory = MessageFactory.getInstance();
+	private NetMessageCodec _msgFactory = NetMessageCodec.getInstance();
 	private NetWork _netWork;
 
 	static private NetManager _instance = null;
@@ -60,15 +60,15 @@ public class NetManager : MonoBehaviour
 
 	public void sendNetMessage(NetMsgId msgId, IExtensible message) 
 	{
-		NetMessage netMsg = new NetMessage();
-		netMsg.msgId = msgId;
-		netMsg.message = message;
-		sendNetMessage(netMsg);
+        PbTestNetMessage pbMessage = new PbTestNetMessage();
+        pbMessage.getContent().id = 12343;
+        pbMessage.getContent().name = "PbTestNetMessage";
+        sendNetMessage(pbMessage);
 	}
 
 	public void sendNetMessage(NetMessage msg)
 	{
-		if((msg == null) || (msg.message == null))
+		if((msg == null) || (msg.content == null))
 		{
 			return;
 		}

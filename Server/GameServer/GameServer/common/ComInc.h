@@ -16,4 +16,6 @@
 #include "boost/function.hpp"
 #include "boost/any.hpp"
 
+#include "SGMacro.h"
+
 #endif // ComInc_h__

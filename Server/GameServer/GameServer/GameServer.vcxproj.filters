@@ -75,11 +75,14 @@
     <ClInclude Include="protocol\message\SgMsgId.pb.h">
       <Filter>源文件\protocol\message</Filter>
     </ClInclude>
-    <ClInclude Include="protocol\MessageFactory.h">
-      <Filter>源文件\protocol</Filter>
-    </ClInclude>
     <ClInclude Include="protocol\message\SgMsg.pb.h">
       <Filter>源文件\protocol\message</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\NetMessageCodec.h">
+      <Filter>源文件\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\NetMessageFactory.h">
+      <Filter>源文件\protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +113,14 @@
     <ClCompile Include="protocol\message\SgMsgId.pb.cc">
       <Filter>源文件\protocol\message</Filter>
     </ClCompile>
-    <ClCompile Include="protocol\MessageFactory.cpp">
-      <Filter>源文件\protocol</Filter>
-    </ClCompile>
     <ClCompile Include="protocol\message\SgMsg.pb.cc">
       <Filter>源文件\protocol\message</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\NetMessageCodec.cpp">
+      <Filter>源文件\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\NetMessageFactory.cpp">
+      <Filter>源文件\protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -97,9 +97,10 @@
     <ClInclude Include="network\Session.h" />
     <ClInclude Include="network\SessionServiceManager.h" />
     <ClInclude Include="network\SessionService.h" />
-    <ClInclude Include="protocol\MessageFactory.h" />
     <ClInclude Include="protocol\message\SgMsg.pb.h" />
     <ClInclude Include="protocol\message\SgMsgId.pb.h" />
+    <ClInclude Include="protocol\NetMessageCodec.h" />
+    <ClInclude Include="protocol\NetMessageFactory.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -111,9 +112,10 @@
     <ClCompile Include="network\Session.cpp" />
     <ClCompile Include="network\SessionServiceManager.cpp" />
     <ClCompile Include="network\SessionService.cpp" />
-    <ClCompile Include="protocol\MessageFactory.cpp" />
     <ClCompile Include="protocol\message\SgMsg.pb.cc" />
     <ClCompile Include="protocol\message\SgMsgId.pb.cc" />
+    <ClCompile Include="protocol\NetMessageCodec.cpp" />
+    <ClCompile Include="protocol\NetMessageFactory.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

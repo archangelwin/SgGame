@@ -2,6 +2,16 @@
 
 NS_BEGIN_SG
 
+NetMessage::NetMessage()
+:msgId((NetMsgId)0),
+message()
+{}
+
+NetMessage::NetMessage(NetMsgId msgId, shared_ptr<google::protobuf::Message> msg)
+: msgId(msgId),
+message(msg)
+{}
+
 Session::Session(shared_ptr<ASIO_TCP_SOCKET> sock)
 :_sock(sock),
 _recvDataCachePos(0),
@@ -35,7 +45,7 @@ void Session::onTick()
 
 	//SG_TRACE("onTick sendNet Message");
 
-		shared_ptr<NetMessage> testMsg(new NetMessage());
+		/*shared_ptr<NetMessage> testMsg(new NetMessage());
 		testMsg->msgId = NetMsgId::CS_PbTest;
 
 		shared_ptr<PbTest> pbTest(new PbTest());
@@ -44,7 +54,7 @@ void Session::onTick()
 		testMsg->message = pbTest;
 
 	
-		sendNetMessage(testMsg);
+		sendNetMessage(testMsg);*/
 	sendData();
 }
 
@@ -145,7 +155,7 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 
 	while (1)
 	{
-		message = MessageFactory::decodeMessage(_recvDataCache, _recvDataCachePos, readSize);
+		message = NetMessageCodec::decodeMessage(_recvDataCache, _recvDataCachePos, readSize);
 		if (message != NULL)
 		{
 			_recvMessageQueue.push(message);
@@ -170,7 +180,7 @@ void Session::sendNetMessage(shared_ptr<NetMessage> message)
 {
 	SgInt16 dataSize = 0;
 	boost::mutex::scoped_lock lock(_muSendMsg);
-	if (MessageFactory::encodeMessage(_sendDataCache + _sendDataCachePos, message, SendDataCacheMaxLen - _sendDataCachePos, dataSize))
+	if (NetMessageCodec::encodeMessage(_sendDataCache + _sendDataCachePos, message, SendDataCacheMaxLen - _sendDataCachePos, dataSize))
 	{
 		_sendDataCachePos += dataSize;
 		SG_TRACE2("encodeMessage size: ", dataSize);
@@ -194,10 +204,11 @@ bool Session::processNetMessage(shared_ptr<NetMessage> netMsg)
 	netMsg->message->PrintDebugString();
 
 	shared_ptr<NetMessage> testMsg(new NetMessage());
-	testMsg->msgId = NetMsgId::CS_PbTest;
-	shared_ptr<PbTest> pbTest(new PbTest());
-	pbTest->set_id(111);
-	pbTest->set_name("resonse  from server!");
+	testMsg->msgId = NetMsgId::CS_UseItem;
+	shared_ptr<UseItem> pbTest(new UseItem());
+	pbTest->set_itemindex(1);
+	pbTest->set_pktid(11);
+	pbTest->set_usecommond(2);
 	testMsg->message = pbTest;
 	sendNetMessage(testMsg);
 
