@@ -10,8 +10,8 @@
 #ifndef SessionManager_h__
 #define SessionManager_h__
 
-#include "../common/SGMacro.h"
-#include "../common/ComInc.h"
+#include <SgLib.h>
+
 #include "./SessionService.h"
 
 #include <boost/asio.hpp>

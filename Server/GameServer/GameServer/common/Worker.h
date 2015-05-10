@@ -3,8 +3,7 @@
 #ifndef Worker_h__
 #define Worker_h__
 
-#include "SGMacro.h"
-#include "ComInc.h"
+#include <SgLib.h>
 #include "boost/thread.hpp"
 #include "Runable.hpp"
 

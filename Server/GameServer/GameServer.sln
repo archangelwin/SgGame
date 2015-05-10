@@ -4,8 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "GameServer\GameServer.vcxproj", "{7550DE30-1810-43C6-A2F7-C72216158ADC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5} = {9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetMessageFactoryCreater", "NetMessageFactoryCreater\NetMessageFactoryCreater.vcxproj", "{07CF61ED-71BB-4290-A984-E6A556C18BD3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5} = {9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbcTable", "DbcTable\DbcTable.vcxproj", "{C855991C-8AEE-4B77-8212-C2113622408E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5} = {9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibSg", "LibSg\LibSg.vcxproj", "{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +34,14 @@ Global
 		{07CF61ED-71BB-4290-A984-E6A556C18BD3}.Debug|Win32.Build.0 = Debug|Win32
 		{07CF61ED-71BB-4290-A984-E6A556C18BD3}.Release|Win32.ActiveCfg = Release|Win32
 		{07CF61ED-71BB-4290-A984-E6A556C18BD3}.Release|Win32.Build.0 = Release|Win32
+		{C855991C-8AEE-4B77-8212-C2113622408E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C855991C-8AEE-4B77-8212-C2113622408E}.Debug|Win32.Build.0 = Debug|Win32
+		{C855991C-8AEE-4B77-8212-C2113622408E}.Release|Win32.ActiveCfg = Release|Win32
+		{C855991C-8AEE-4B77-8212-C2113622408E}.Release|Win32.Build.0 = Release|Win32
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}.Debug|Win32.Build.0 = Debug|Win32
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}.Release|Win32.ActiveCfg = Release|Win32
+		{9F7F02C7-BF35-42CD-AE98-2EBE5BAC7AF5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

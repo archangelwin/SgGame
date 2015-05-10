@@ -3,9 +3,8 @@
 #ifndef NetworkWorker_h__
 #define NetworkWorker_h__
 
-#include "../common/SGMacro.h"
+#include <SgLib.h>
 #include "../common/Service.h"
-#include "../common/ComInc.h"
 #include "../common/Message.h"
 #include "boost/asio.hpp"
 #include "./SessionServiceManager.h"

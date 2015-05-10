@@ -3,9 +3,7 @@
 #ifndef Message_h__
 #define Message_h__
 
-#include "SGMacro.h"
-
-#include "ComInc.h"
+#include <SgLib.h>
 
 NS_BEGIN_SG
 US_NS_BOOST

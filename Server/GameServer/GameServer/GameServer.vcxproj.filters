@@ -39,13 +39,7 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="common\SGMacro.h">
-      <Filter>源文件\common</Filter>
-    </ClInclude>
     <ClInclude Include="common\Runable.hpp">
-      <Filter>源文件\common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\ComInc.h">
       <Filter>源文件\common</Filter>
     </ClInclude>
     <ClInclude Include="common\Worker.h">
@@ -68,9 +62,6 @@
     </ClInclude>
     <ClInclude Include="network\SessionServiceManager.h">
       <Filter>源文件\network</Filter>
-    </ClInclude>
-    <ClInclude Include="common\BytesUtils.hpp">
-      <Filter>源文件\common</Filter>
     </ClInclude>
     <ClInclude Include="protocol\message\SgMsgId.pb.h">
       <Filter>源文件\protocol\message</Filter>

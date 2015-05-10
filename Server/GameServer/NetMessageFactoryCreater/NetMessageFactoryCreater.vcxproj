@@ -39,7 +39,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\tools\Protocol</OutDir>
+    <OutDir>..\..\..\tools\Protocol\</OutDir>
+    <IncludePath>..\..\boost_1_57_0\;..\LibSg\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Libs\;..\..\boost_1_57_0\stage\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -49,6 +51,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LibSg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,11 +71,9 @@
   <ItemGroup>
     <ClCompile Include="NetMessageFactoryCreater.cpp" />
     <ClCompile Include="NetMessageInfo.cpp" />
-    <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetMessageInfo.h" />
-    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

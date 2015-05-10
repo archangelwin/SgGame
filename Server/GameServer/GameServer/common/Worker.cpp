@@ -1,5 +1,5 @@
 #include "Worker.h"
-#include "ComInc.h"
+#include <SgLib.h>
 
 NS_BEGIN_SG
 

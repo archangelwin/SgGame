@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\protobuf-3.0.0-alpha-1\vsprojects\include;..\..\boost_1_57_0;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\protobuf-3.0.0-alpha-1\vsprojects\Debug;..\..\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\LibSg\;..\..\protobuf-3.0.0-alpha-1\vsprojects\include\;..\..\boost_1_57_0\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\protobuf-3.0.0-alpha-1\vsprojects\Debug\;..\..\boost_1_57_0\stage\lib\;..\Libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -86,12 +86,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\BytesUtils.hpp" />
-    <ClInclude Include="common\ComInc.h" />
     <ClInclude Include="common\Message.h" />
     <ClInclude Include="common\Runable.hpp" />
     <ClInclude Include="common\Service.h" />
-    <ClInclude Include="common\SGMacro.h" />
     <ClInclude Include="common\Worker.h" />
     <ClInclude Include="network\NetworkWorker.h" />
     <ClInclude Include="network\Session.h" />

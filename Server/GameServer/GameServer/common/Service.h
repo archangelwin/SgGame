@@ -3,8 +3,7 @@
 #ifndef Service_h__
 #define Service_h__
 
-#include "SGMacro.h"
-#include "ComInc.h"
+#include <SgLib.h>
 #include "Message.h"
 #include "Worker.h"
 

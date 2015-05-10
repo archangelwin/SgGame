@@ -10,8 +10,7 @@
 #ifndef SessionService_h__
 #define SessionService_h__
 
-#include "../common/ComInc.h"
-#include "../common/SGMacro.h"
+#include <SgLib.h>
 #include "../common/Service.h"
 #include "boost/asio.hpp"
 #include "Session.h"

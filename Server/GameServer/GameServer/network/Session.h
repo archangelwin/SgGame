@@ -11,10 +11,10 @@
 #ifndef Session_h__
 #define Session_h__
 
-#include "../common/ComInc.h"
-#include "../common/SGMacro.h"
-#include "../common/BytesUtils.hpp"
-#include "boost/asio.hpp"
+#include <ByteUtils.hpp>
+
+#include <SgLib.h>
+#include <boost/asio.hpp>
 #include "../protocol/message/SgMsgId.pb.h"
 #include "../protocol/NetMessageCodec.h"
 

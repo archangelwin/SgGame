@@ -14,7 +14,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "StringUtils.h"
+#include <StringUtils.h>
 
 #define MessageName(__x) ((*(__x))->messageName).c_str() 
 #define MessageId(__x) ((*(__x))->messageId).c_str()
