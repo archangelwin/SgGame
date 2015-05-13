@@ -28,12 +28,12 @@ int DbcTable::getCol()
 	{
 		return 0;
 	}
-	return _tableData[0].size();
+	return _tableData.size();
 }
 
 int DbcTable::getRow()
 {
-	return _tableData.size();
+	return _tableData[0].size();
 }
 
 const vector<string>* DbcTable::getDataCol(string filedName)
@@ -50,26 +50,37 @@ const vector<string>* DbcTable::getDataCol(string filedName)
 	return NULL;
 }
 
-bool DbcTable::checkRefrence(vector<string>* src, vector<string>* dst)
+const vector<string>* DbcTable::getDataCol(int index)
+{
+	if (index < _tableData.size())
+	{
+		_tableData[index];
+	}
+
+	return NULL;
+}
+
+bool DbcTable::checkRefrence(const string tableNameSrc, const vector<string>* src, const string tableNameDst, const vector<string>* dst)
 {
 	ReturnFalseIfNull(src)
 	ReturnFalseIfNull(dst)
 
-	if (src->size() < (int)RowDefineMax)
+	if (src->size() < (int)MaxRowDefine)
 	{
 		return false;
 	}
 	
-	if (dst->size() < (int)RowDefineMax)
+	if (dst->size() < (int)MaxRowDefine)
 	{
 		return false;
 	}
 
 	bool ret = true;
 	vector<string>::size_type i, j, len, len2;
-	for (i = (vector<string>::size_type)RowDefineMax, len=src->size(); i < len; i++)
+	char strLog[200];
+	for (i = (vector<string>::size_type)MaxRowDefine, len=src->size(); i < len; i++)
 	{
-		for (j = (vector<string>::size_type)RowDefineMax, len2 = dst->size(); j < len2; j++)
+		for (j = (vector<string>::size_type)MaxRowDefine, len2 = dst->size(); j < len2; j++)
 		{
 			if ((*src)[i] == (*dst)[j])
 			{
@@ -78,7 +89,9 @@ bool DbcTable::checkRefrence(vector<string>* src, vector<string>* dst)
 		}
 
 		ret = false;
-		SG_TRACE3("filed refrence error, filed value:", (*src)[FiledName], (*src)[i]);
+		memset(strLog, 0x00, sizeof(strLog));
+		sprintf_s(strLog, sizeof(strLog), "failed find refrence, srcTableName=%s srcFiledName=%s dstTableName=%s dstFiledName=%s value=%s row=%d", tableNameSrc, (*src)[FiledName], tableNameDst, (*dst)[FiledName], (*src)[i], i);
+		SG_TRACE(strLog);
 	}
 
 	return ret;

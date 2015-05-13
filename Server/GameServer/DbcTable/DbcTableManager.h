@@ -14,6 +14,7 @@ public:
 
 	void addTable(DbcTable* table);
 	DbcTable* getTable(string name);
+	bool checkRefrence();
 
 	static const string RefrenceTableName;
 

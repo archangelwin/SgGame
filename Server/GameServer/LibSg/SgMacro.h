@@ -25,6 +25,7 @@
 #define SG_TRACE(__x) std::cout<<(__x)<<std::endl;
 #define SG_TRACE2(__x, __y) std::cout<<(__x)<<(__y)<<std::endl;
 #define SG_TRACE3(__x, __y, __z) std::cout<<(__x)<<(__y)<<__z<<std::endl;
+#define SG_TRACE5(__x, __y, __z, __w, __v) std::cout<<(__x)<<(__y)<<__z<<__w<<__v<<std::endl;
 #define SgInsSessionServMgr SessionServiceManager::getInstance()
 
 #endif // SGMacro_h__

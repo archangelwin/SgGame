@@ -24,7 +24,16 @@ public:
 		FiledDesc = 0,
 		FiledName,
 		FiledType,
-		RowDefineMax,
+		MaxRowDefine,
+	};
+
+	enum RefrenceCol
+	{
+		TableNameSrc =0,
+		TableFieldSrc,
+		TableNameDst,
+		TableFieldDst,
+		MaxRefrence,
 	};
 
 	DbcTable(string tableName);
@@ -32,13 +41,14 @@ public:
 	int getCol();
 	int getRow();
 	const vector<string>* getDataCol(string filedName);
+	const vector<string>* getDataCol(int colIndex);
 
 	inline string getTableName()
 	{
 		return _tableName;
 	}
 
-	static bool checkRefrence(vector<string>* src, vector<string>* dst);
+	static bool checkRefrence(const string tableNameSrc, const vector<string>* src, const string tableNameDst, const vector<string>* dst);
 private:
 	string _tableName;
 	vector<vector<string>> _tableData;
