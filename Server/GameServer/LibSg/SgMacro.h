@@ -9,6 +9,9 @@
 #define US_NS_STD	using namespace std;
 #define US_NS_BOOST	using namespace boost;
 
+#define ReturnVoidIfNull(__x) if((__x) == NULL) { return; }
+#define ReturnFalseIfNull(__x) if((__x) == NULL) { return false; }
+
 #define ASIO_TCP_SOCKET boost::asio::ip::tcp::socket
 
 #define SgUInt8 boost::uint8_t

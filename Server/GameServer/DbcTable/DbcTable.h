@@ -19,16 +19,26 @@ using namespace std;
 class DbcTable
 {
 public:
+	enum RowDefine
+	{
+		FiledDesc = 0,
+		FiledName,
+		FiledType,
+		RowDefineMax,
+	};
+
 	DbcTable(string tableName);
 	bool fillDataWithFile(ifstream file);
 	int getCol();
 	int getRow();
+	const vector<string>* getDataCol(string filedName);
 
 	inline string getTableName()
 	{
 		return _tableName;
 	}
 
+	static bool checkRefrence(vector<string>* src, vector<string>* dst);
 private:
 	string _tableName;
 	vector<vector<string>> _tableData;

@@ -18,12 +18,18 @@
     <ClInclude Include="DbcTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DbcTableManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DbcTable.cpp">
       <Filter>资源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DbcTableManager.cpp">
       <Filter>资源文件</Filter>
     </ClCompile>
   </ItemGroup>

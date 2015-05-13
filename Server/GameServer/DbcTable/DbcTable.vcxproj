@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>../LibSg;$(IncludePath)</IncludePath>
+    <IncludePath>../LibSg;..\..\boost_1_57_0\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -67,9 +67,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DbcTable.h" />
+    <ClInclude Include="DbcTableManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DbcTable.cpp" />
+    <ClCompile Include="DbcTableManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
